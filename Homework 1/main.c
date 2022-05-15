@@ -8,7 +8,7 @@
 * DESCRIPTION:
 *       Heart rate is an important factor to consider during intensive
 *       physical activities. This program prompts a user's age to then 
-*       calculate their maximum heart rate and target heart rates
+*       calculate their maximum heart rate and target heart rate. 
 * VERSION: 
 ************************************************************/
 
@@ -36,14 +36,20 @@ int main()
     printf("Target Heart Rate Calculator\n");
     printf("----------------------------\n");
 
-    // Prompt user's age, today's date in MM/DD/YYYY --< format date
-    printf("Please enter your birthdate and today's date: ");
+    // Prompt user's age, today's date
+    printf("Enter your birth date (MM/DD/YYYY): ");
+    scanf("%d/%d/%d", &birthMonth, &birthDay, &birthYear);
+    printf("Enter today's date (MM/DD/YYYY): ");
+    scanf("%d/%d/%d", &currMonth, &currDay, &currYear);
 
-    // String parser with some error checking
-    scanf("%d", &birthDay);
+    // Calculate user's age, consider leap years (?)
+    userAge = currYear - birthYear - 1;
+
+    if(currMonth >= birthMonth && currDay >= birthDay)
+        userAge += 1; 
 
     // Calculate user's maxiumum heart rate in BPM
-    maxHeartRate = 220 - userAge; 
+    maxHeartRate = 220 - userAge;
 
     // Calculate lower bound of target heart rate
     lowHeartRate = maxHeartRate * 0.50;
@@ -53,9 +59,9 @@ int main()
 
     // Display results to user
     printf("____________________________\n");
-    printf("User's age: %d years, \n", userAge);
-    printf("User's maximum heart rate: %d BPM, \n", maxHeartRate);
-    printf("User's target heart rate: %d - %d BPM, \n", lowHeartRate, highHeartRate);
+    printf("Age: %d years, \n", userAge);
+    printf("Maximum heart rate: %d BPM, \n", maxHeartRate);
+    printf("Target heart rate: %d - %d BPM, \n", lowHeartRate, highHeartRate);
     printf("----------------------------\n");
 
     return 0;
